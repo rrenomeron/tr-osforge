@@ -13,26 +13,28 @@ set -eou pipefail
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
-echo "Installing \"Image Opinion\", fixes, and extra packages from Bluefin"
 
-# Copy just files from @projectbluefin/common (includes 00-entry.just which imports 60-custom.just)
+echo "Copying System Files"
+
 mkdir -p /usr/share/ublue-os/just/
 shopt -s nullglob
 cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
 cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
-#cp -r /ctx/oci/common/shared/* /
 rsync -av \
 	--exclude=etc/profile.d/ublue-fastfetch.sh \
  /ctx/oci/common/shared/ /
+cp -r /ctx/oci/tr-osforge/system_files/bluefin-parity/* / 
 shopt -u nullglob
+
+
+echo "Installing Gnome Extensions"
 
 /tmp/scripts/run_module.sh 'gnome-extensions' \
     '{"type":"gnome-extensions","install":["AppIndicator and KStatusNotifierItem Support","Dash to Dock","Blur my Shell","Logo Menu"]}'
 
+echo "Installing packages"
 
-# Packages for parity
-# Note: pcsc-lite needed for Alma
-
+# Note pcsc-lite will be needed for Alma
 dnf5 -y --setopt=install_weak_deps=False install \
 	clinfo \
 	fastfetch \
@@ -42,7 +44,7 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	glow \
 	gnome-disk-utility \
 	gnome-tweaks \
-	gum\
+	gum \
 	lm_sensors \
 	nss-mdns \
 	openssh-askpass \
@@ -59,6 +61,9 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	yq
 
 copr_install_isolated ublue-os/packages uupd
+
+
+echo "Disabling non-ublue update mechanisms" 
 
 systemctl disable rpm-ostreed-automatic.timer
 systemctl disable flatpak-system-update.timer
@@ -81,7 +86,13 @@ ghcr.io/rrenomeron/${MOTD_IMAGE_NAME}:${MOTD_IMAGE_TAG}
 
 TEMPLATE.MD
 
+
 echo "Adding Cascadia Code"
 /tmp/scripts/run_module.sh 'fonts' \
   '{ "type": "fonts", "fonts" : {"url-fonts": [ { "name": "cascadia-code", "url": "https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip" } ] }}'
+
+
+echo "Adding Ptyxis Configuration"
+
+glib-compile-schemas /usr/share/glib-2.0/schemas
 

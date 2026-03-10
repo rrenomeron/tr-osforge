@@ -14,6 +14,8 @@ dnf5 -y install --enablerepo=docker-ce-stable \
     docker-compose-plugin \
     docker-model-plugin
 
+echo "Disabling Rootful Docker"
+
 systemctl disable docker.socket
 systemctl disable docker.service
 

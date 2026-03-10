@@ -7,3 +7,5 @@ cp -r /ctx/oci/tr-osforge/system_files/tr-pki/* /
 
 echo "Adding TR CA to system PKI"
 update-ca-trust extract
+
+echo "done"

@@ -14,7 +14,8 @@ set -oue pipefail
 ### Install Google Chrome from Official Repository
 echo "Installing Google Chrome..."
 
-# Add Google Chrome RPM repository
+echo "Enabling Google Repository"
+
 cat > /etc/yum.repos.d/google-chrome.repo << 'EOF'
 [google-chrome]
 name=google-chrome
@@ -24,6 +25,8 @@ gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
 
+echo "Enabling install in /opt"
+
 mkdir -p /var/opt/
 mkdir -p /usr/lib/opt/google
 ln -s /usr/lib/opt/google /var/opt/google
@@ -31,10 +34,14 @@ cat > /usr/lib/tmpfiles.d/99-google-chrome-in-opt.conf << EOF
 L+?  "/var/opt/google"  -  -  -  -  /usr/lib/opt/google
 EOF
 
-# Install Chrome
+
+echo "Installing"
+
 dnf5 install -y google-chrome-stable
 
+
+echo "Cleanup"
 # Clean up repo file (required - repos don't work at runtime in bootc images)
 rm -f /etc/yum.repos.d/google-chrome.repo
 
-echo "Google Chrome installed successfully"
+echo "done"

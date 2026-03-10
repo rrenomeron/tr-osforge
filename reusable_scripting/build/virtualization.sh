@@ -16,6 +16,8 @@ echo "Installing various libvirt fixes"
 copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds
 
 # Copied from Bluefin
+echo "Enabling virtualization-enabled groups"
+
 cat > /usr/bin/bluefin-dx-groups << "DX_GROUPS_SCRIPT"
 #!/usr/bin/env bash
 
