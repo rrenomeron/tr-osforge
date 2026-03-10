@@ -7,7 +7,7 @@ echo "Installing Virtualization packages"
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
-# Including weak deps pulls in a lot of extras stuff, some of which we might
+# Including weak deps pulls in a lot of extrapa stuff, some of which we might
 # not need.  Think about being more thoughtful about what we really need
 # from libvirt.
 #dnf5 -y --setopt=install_weak_deps=False install \
@@ -15,8 +15,9 @@ dnf5 -y install \
     cockpit-machines \
     libvirt \
     libvirt-nss \
-    qemu-device-display-virtio-gpu \
-    qemu-device-display-virtio-vga
+    qemu-kvm \
+    virt-v2v \
+    virt-viewer
 
 echo "Installing various libvirt fixes" 
 copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds
