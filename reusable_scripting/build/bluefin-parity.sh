@@ -20,6 +20,7 @@ mkdir -p /usr/share/ublue-os/just/
 shopt -s nullglob
 cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
 cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
+cp /ctx/oci/common/bluefin/etc/dconf/db/distro.d/03-bluefin-ptyxis-palette /etc/dconf/db/distro.d
 rsync -av \
 	--exclude=etc/profile.d/ublue-fastfetch.sh \
  /ctx/oci/common/shared/ /
@@ -44,15 +45,19 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	fastfetch \
 	ffmpegthumbnailer \
 	firewall-config \
+	flatpak-builder \
 	fzf \
 	glow \
 	gnome-disk-utility \
 	gnome-tweaks \
 	gum \
+	iotop \
 	lm_sensors \
 	nss-mdns \
 	openssh-askpass \
 	papers-thumbnailer  \
+	podman-compose \
+	podman-tui \
 	powertop \
 	rclone \
 	restic \

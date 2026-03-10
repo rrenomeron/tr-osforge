@@ -7,15 +7,21 @@ echo "Installing Virtualization packages"
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
-dnf5 -y --setopt=install_weak_deps=False install \
+# Including weak deps pulls in a lot of extras stuff, some of which we might
+# not need.  Think about being more thoughtful about what we really need
+# from libvirt.
+#dnf5 -y --setopt=install_weak_deps=False install \
+dnf5 -y install \
+    cockpit-machines \
     libvirt \
     libvirt-nss \
-    cockpit-machines
+    qemu-device-display-virtio-gpu \
+    qemu-device-display-virtio-vga
 
 echo "Installing various libvirt fixes" 
 copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds
 
-# Copied from Bluefin
+# Copied from Bluefin, NOT common
 echo "Enabling virtualization-enabled groups"
 
 cat > /usr/bin/bluefin-dx-groups << "DX_GROUPS_SCRIPT"
