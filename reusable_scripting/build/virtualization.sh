@@ -15,7 +15,7 @@ dnf5 -y install \
     cockpit-machines \
     libvirt \
     libvirt-nss \
-    qemu-kvm \
+    qemu \
     virt-v2v \
     virt-viewer
 
