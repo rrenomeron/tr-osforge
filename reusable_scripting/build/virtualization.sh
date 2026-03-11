@@ -7,15 +7,26 @@ echo "Installing Virtualization packages"
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
-# Including weak deps pulls in a lot of extrapa stuff, some of which we might
+# Including weak deps pulls in a lot of extra stuff, some of which we might
 # not need.  Think about being more thoughtful about what we really need
 # from libvirt.
 #dnf5 -y --setopt=install_weak_deps=False install \
 dnf5 -y install \
     cockpit-machines \
+    edk2-ovmf \
     libvirt \
     libvirt-nss \
     qemu \
+    qemu-char-spice \
+    qemu-device-display-virtio-gpu \
+    qemu-device-display-virtio-vga \
+    qemu-device-usb-redirect \
+    qemu-img \
+    qemu-kvm \
+    qemu-system-x86-core \
+    qemu-user-binfmt \
+    qemu-user-static \
+    virt-manager \
     virt-v2v \
     virt-viewer
 
@@ -67,6 +78,8 @@ done
 echo "Writing state file"
 echo "$GROUP_SETUP_VER" >"$GROUP_SETUP_VER_FILE"
 DX_GROUPS_SCRIPT
+
+chmod ugo+x /usr/bin/bluefin-dx-groups
 
 cat > /usr/lib/systemd/system/bluefin-dx-groups.service << "SYSTEMD_UNIT"
 [Unit]

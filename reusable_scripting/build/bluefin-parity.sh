@@ -41,12 +41,14 @@ echo "Installing packages"
 
 # Note pcsc-lite will be needed for Alma
 dnf5 -y --setopt=install_weak_deps=False install \
+	android-tools \
 	clinfo \
 	fastfetch \
 	ffmpegthumbnailer \
 	firewall-config \
 	flatpak-builder \
 	fzf \
+	genisoimage \
 	glow \
 	gnome-disk-utility \
 	gnome-tweaks \
@@ -55,17 +57,23 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	lm_sensors \
 	nss-mdns \
 	openssh-askpass \
+	osbuild-selinux \
 	papers-thumbnailer  \
 	podman-compose \
 	podman-tui \
 	powertop \
 	rclone \
 	restic \
+    rocm-hip \
+    rocm-opencl \
+    rocm-smi \
 	setools-console \
+	sysprof \
 	waypipe \
 	wl-clipboard \
     desktop-backgrounds-waves \
     socat \
+	udica \
     xdg-terminal-exec \
 	yq
 
