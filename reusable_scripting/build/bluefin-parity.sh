@@ -103,6 +103,8 @@ ghcr.io/rrenomeron/${MOTD_IMAGE_NAME}:${MOTD_IMAGE_TAG}
 
 TEMPLATE.MD
 
+echo "Enabling Flatpak preinstall"
+systemctl enable flatpak-preinstall.service
 
 echo "Adding Cascadia Code"
 /tmp/scripts/run_module.sh 'fonts' \
