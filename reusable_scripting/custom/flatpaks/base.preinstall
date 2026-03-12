@@ -99,9 +99,6 @@ Branch=stable
 [Flatpak Preinstall org.gnome.Connections]
 Branch=stable
 
-[Flatpak Preinstall org.virt_manager.virt-manager]
-Branch=stable
-
 [Flatpak Preinstall org.gnome.DejaDup]
 Branch=stable
 
