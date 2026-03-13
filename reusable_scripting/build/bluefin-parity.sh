@@ -109,6 +109,9 @@ systemctl enable flatpak-preinstall.service
 echo "Adding Cascadia Code"
 /tmp/scripts/run_module.sh 'fonts' \
   '{ "type": "fonts", "fonts" : {"url-fonts": [ { "name": "cascadia-code", "url": "https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip" } ] }}'
+# VSCode can't find Cascadia Code if it's in /usr/share/fonts/url-fonts
+# So we move it up
+mv /usr/share/fonts/url-fonts/cascadia-code /usr/share/fonts
 
 
 echo "Adding Ptyxis Configuration"

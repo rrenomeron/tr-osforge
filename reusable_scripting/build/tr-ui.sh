@@ -11,7 +11,10 @@ echo "Installing Gnome Extensions"
 
 echo "Adding Fonts"
 /tmp/scripts/run_module.sh 'fonts' \
-  '{ "type": "fonts", "fonts" : {"google-fonts": [ "Roboto", "Roboto Condensed", "Lato", "Lora", "Montserrat" ], "url-fonts": [ { "name": "intel-one-mono-fonts", "url": "https://github.com/intel/intel-one-mono/releases/download/V1.4.0/otf.zip" }, { "name": "gentium-7", "url": "https://software.sil.org/downloads/r/gentium/Gentium-7.000.zip" }, { "name": "charis-7", "url": "https://software.sil.org/downloads/r/charis/Charis-7.000.zip" } ] }}'
+  '{ "type": "fonts", "fonts" : {"google-fonts": [ "Roboto", "Roboto Condensed", "Lato", "Lora", "Montserrat" ], "url-fonts": [ { "name": "intel-one-mono", "url": "https://github.com/intel/intel-one-mono/releases/download/V1.4.0/otf.zip" }, { "name": "gentium-7", "url": "https://software.sil.org/downloads/r/gentium/Gentium-7.000.zip" }, { "name": "charis-7", "url": "https://software.sil.org/downloads/r/charis/Charis-7.000.zip" } ] }}'
+# VSCode apparently can't find Intel One Mono if it's in /usr/share/fonts/url-fonts
+# So we move it up.
+mv /usr/share/fonts/url-fonts/intel-one-mono /usr/share/fonts
 
 echo "Installing System76 Wallpapers"
 curl -L https://system76.com/content/downloads/System76-Wallpapers.zip > /tmp/System76-Wallpapers.zip
