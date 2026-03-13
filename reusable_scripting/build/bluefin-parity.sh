@@ -112,7 +112,7 @@ echo "Adding Cascadia Code"
 # VSCode can't find Cascadia Code if it's in /usr/share/fonts/url-fonts
 # So we move it up
 mv /usr/share/fonts/url-fonts/cascadia-code /usr/share/fonts
-
+fc-cache --system-only --really-force /usr/share/fonts/cascadia-code
 
 echo "Adding Ptyxis Configuration"
 

@@ -15,6 +15,7 @@ echo "Adding Fonts"
 # VSCode apparently can't find Intel One Mono if it's in /usr/share/fonts/url-fonts
 # So we move it up.
 mv /usr/share/fonts/url-fonts/intel-one-mono /usr/share/fonts
+fc-cache --system-only --really-force /usr/share/fonts/url-fonts/intel-one-mono
 
 echo "Installing System76 Wallpapers"
 curl -L https://system76.com/content/downloads/System76-Wallpapers.zip > /tmp/System76-Wallpapers.zip
