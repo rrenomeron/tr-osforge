@@ -4,7 +4,7 @@ set -eoux pipefail
 
 echo "Installing Cockpit packages"
 
-dnf5 -y --setopt=install_weak_deps=False install \
+$DNF_CMD -y --setopt=install_weak_deps=False install \
     cockpit-networkmanager \
     cockpit-ostree \
     cockpit-bridge \

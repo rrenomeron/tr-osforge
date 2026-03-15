@@ -2,6 +2,8 @@
 
 set -eou pipefail
 
+source /ctx/oci/tr-osforge/build/helpers/utils.sh
+
 echo "Copy system files"
 cp -r /ctx/oci/tr-osforge/system_files/tr-ui-fixes/* /
 

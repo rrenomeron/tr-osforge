@@ -12,7 +12,7 @@ gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
 
-dnf5 -y install code
+$DNF_CMD -y install code
 
 rm -rf /etc/yum.repos.d/vscode.repo
 

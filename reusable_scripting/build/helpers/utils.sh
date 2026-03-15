@@ -26,3 +26,5 @@ get_base_os() {
         export BASE_OS_VERSION="unknown"
     fi
 }
+
+get_base_os

@@ -12,18 +12,20 @@ set -eou pipefail
 # Source helper functions
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
+source /ctx/oci/tr-osforge/build/helpers/utils.sh
 
 
 echo "Copying System Files"
 
 mkdir -p /usr/share/ublue-os/just/
 shopt -s nullglob
-cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
-cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
-cp /ctx/oci/common/bluefin/etc/dconf/db/distro.d/03-bluefin-ptyxis-palette /etc/dconf/db/distro.d
+
 rsync -av \
 	--exclude=etc/profile.d/ublue-fastfetch.sh \
  /ctx/oci/common/shared/ /
+cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
+cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
+cp /ctx/oci/common/bluefin/etc/dconf/db/distro.d/03-bluefin-ptyxis-palette /etc/dconf/db/distro.d
 cp -r /ctx/oci/tr-osforge/system_files/bluefin-parity/* / 
 shopt -u nullglob
 
@@ -34,14 +36,13 @@ echo "Installing Gnome Extensions"
     '{"type":"gnome-extensions","install":["AppIndicator and KStatusNotifierItem Support","Blur my Shell","Logo Menu"]}'
 # Temporary workaround for https://github.com/micheleg/dash-to-dock/issues/2413
 # Remove when v104 of the extension is relased
-dnf5 -y --setopt=install_weak_deps=False install \
+$DNF_CMD -y --setopt=install_weak_deps=False install \
 	gnome-shell-extension-dash-to-dock
 	
 echo "Installing packages"
 
 # Note pcsc-lite will be needed for Alma
-dnf5 -y --setopt=install_weak_deps=False install \
-	android-tools \
+$DNF_CMD -y --setopt=install_weak_deps=False install \
 	clinfo \
 	fastfetch \
 	ffmpegthumbnailer \
@@ -65,7 +66,6 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	rclone \
 	restic \
     rocm-hip \
-    rocm-opencl \
     rocm-smi \
 	setools-console \
 	sysprof \
@@ -76,6 +76,16 @@ dnf5 -y --setopt=install_weak_deps=False install \
 	udica \
     xdg-terminal-exec \
 	yq
+
+if [ "$BASE_OS_TYPE" == "fedora" ]; then
+	# these tools are not available on Alma
+	$DNF_CMD install -y \
+		android-tools \
+    	rocm-opencl 
+elif [ "$BASE_OS_TYPE" == "almalinux" ]; then
+	$DNF_CMD install -y \
+		pcsc-lite
+fi
 
 copr_install_isolated ublue-os/packages uupd
 
@@ -89,6 +99,7 @@ systemctl disable bootc-fetch-apply-updates.timer
 
 echo "Setting up non-Bluefin ublue-motd"
 
+mkdir -p /usr/share/ublue-os/motd
 cat > /usr/share/ublue-os/motd/env.sh << ENV.SH
 #!/usr/bin/env sh
 # KEEP THIS SMALL

@@ -3,7 +3,7 @@
 set -oeu pipefail
 
 # These are not present in the latest silverblue
-# dnf5 -y remove \
+# $DNF_CMD -y remove \
 # 	baobab \
 # 	gnome-calculator \
 # 	gnome-characters \

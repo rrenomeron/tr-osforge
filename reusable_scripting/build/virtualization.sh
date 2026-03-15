@@ -6,16 +6,23 @@ echo "Installing Virtualization packages"
 # Source helper functions
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
+source /ctx/oci/tr-osforge/build/helpers/utils.sh
 
 # Including weak deps pulls in a lot of extra stuff, some of which we might
 # not need.  Think about being more thoughtful about what we really need
 # from libvirt.
-#dnf5 -y --setopt=install_weak_deps=False install \
-dnf5 -y install \
+#$DNF_CMD -y --setopt=install_weak_deps=False install \
+$DNF_CMD -y install \
     cockpit-machines \
     edk2-ovmf \
     libvirt \
     libvirt-nss \
+    virt-manager \
+    virt-v2v \
+    virt-viewer
+
+if [ "$BASE_OS_TYPE" == "fedora" ]; then
+  $DNF_CMD -y install \
     qemu \
     qemu-char-spice \
     qemu-device-display-virtio-gpu \
@@ -25,10 +32,9 @@ dnf5 -y install \
     qemu-kvm \
     qemu-system-x86-core \
     qemu-user-binfmt \
-    qemu-user-static \
-    virt-manager \
-    virt-v2v \
-    virt-viewer
+    qemu-user-static 
+fi
+
 
 echo "Installing various libvirt fixes" 
 copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds

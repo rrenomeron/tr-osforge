@@ -6,7 +6,7 @@ set -oue pipefail
 ###############################################################################
 # IMPORTANT CONVENTIONS (from @ublue-os/bluefin):
 # - Always clean up temporary repository files after installation
-# - Use dnf5 exclusively (never dnf or yum)
+# - Use $DNF_CMD exclusively (never dnf or yum)
 # - Always use -y flag for non-interactive operations
 # - Remove repo files to keep the image clean (repos don't work at runtime)
 ###############################################################################
@@ -34,10 +34,9 @@ cat > /usr/lib/tmpfiles.d/99-google-chrome-in-opt.conf << EOF
 L+?  "/var/opt/google"  -  -  -  -  /usr/lib/opt/google
 EOF
 
-
 echo "Installing"
 
-dnf5 install -y google-chrome-stable
+$DNF_CMD install -y google-chrome-stable
 
 
 echo "Cleanup"
