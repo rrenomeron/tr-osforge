@@ -1,6 +1,13 @@
 #!/usr/bin/bash
 set -eoux pipefail
 
+
+if command -v dnf5; then
+    export DNF_CMD=dnf5
+else 
+    export DNF_CMD=dnf
+fi
+
 # Remove Existing Kernel
 for pkg in kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra; do
     rpm --erase $pkg --nodeps
