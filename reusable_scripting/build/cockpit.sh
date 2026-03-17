@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 set -eoux pipefail
+source /ctx/oci/tr-osforge/build/helpers/utils.sh
 
 echo "Installing Cockpit packages"
 

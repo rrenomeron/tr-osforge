@@ -27,4 +27,13 @@ get_base_os() {
     fi
 }
 
+get_dnf_command() {
+    if command -v dnf5; then
+        export DNF_CMD=dnf5
+    else 
+        export DNF_CMD=dnf
+    fi
+}
+
 get_base_os
+get_dnf_command

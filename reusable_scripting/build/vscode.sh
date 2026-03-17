@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 set -eou pipefail
-
+source /ctx/oci/tr-osforge/build/helpers/utils.sh
 echo "Installing Visual Studio Code"
 cat > /etc/yum.repos.d/vscode.repo << EOF
 [code]
