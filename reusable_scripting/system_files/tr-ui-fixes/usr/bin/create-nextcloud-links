@@ -1,11 +1,29 @@
 #!/usr/bin/bash
 
-if [ -d $HOME/Nextcloud ]; then
+# This creates symbolic links in the "well known" directories for Documents,
+# Pictures, etc. for subfolders of Nextcloud.  This enables the user to find
+# (for example) Documents from Nextcloud in a subfolder of the "Documents"
+# folder.
+#
+# This may become useful when (or if) the system starts restricting access for
+# applications to the "well known" folders (which is something similar to how
+# Android restricts apps) for added security.
+
+if [ -d $HOME/Desktop/Nextcloud ]; then
     cd $HOME
-    for dir in Documents Music Pictures Templates Videos; do
+    for dir in Documents Music Templates Videos; do
         if [ ! -d $dir/Nextcloud ]; then
-            echo "Creating link for ~/Nextcloud/$dir"
+            echo "Creating link for ~/$dir/Nextcloud"
             ln -s ~/Nextcloud/$dir $dir/Nextcloud
         fi
     done 
+
+    # The default pictures directory on Nextcloud is "Photos", but
+    # The XDG/Freedsktop (Linux) standard is "Pictures".
+    # This handles the disconnect between the standards.
+    if [ ! -d Pictures/Nextcloud ]; then
+        echo "Creating link for ~/Pictures/Nextcloud"
+        ln -s ~/Nextcloud/Photos Pictures/Nextcloud
+    fi
+
 fi
