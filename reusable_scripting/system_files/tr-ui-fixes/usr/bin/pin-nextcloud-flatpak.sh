@@ -3,7 +3,7 @@
 # Rollback and pin Nextcloud flatpak for when they
 # decide to break it
 
-ARG="$1"
+ARG=$1
 NEXTCLOUD_FLATPAK_ID=com.nextcloud.desktopclient.nextcloud
 
 if [ "$ARG" == "--unpin" ]; then
