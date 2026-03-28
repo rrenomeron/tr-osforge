@@ -8,6 +8,7 @@ NEXTCLOUD_FLATPAK_ID=com.nextcloud.desktopclient.nextcloud
 
 if [ "$ARG" == "--unpin" ]; then
     sudo flatpak mask --remove $NEXTCLOUD_FLATPAK_ID
+    exit
 fi
 
 if [ -f /etc/tr-osforge/nextcloud-flatpak-pin ]; then
