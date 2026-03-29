@@ -20,5 +20,4 @@ if [ "$BASE_OS_TYPE" == "almalinux" ]; then
 fi
 
 dnf -y remove \
-	gnome-disk-utility \
 	gnome-software
