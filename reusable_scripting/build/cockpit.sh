@@ -13,6 +13,7 @@ $DNF_CMD -y --setopt=install_weak_deps=False install \
     cockpit-selinux \
     cockpit-storaged \
     cockpit-system \
-    cockpit-files
+    cockpit-files \
+    pcp
 
 echo "done"
