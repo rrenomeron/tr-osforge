@@ -33,11 +33,11 @@ shopt -u nullglob
 echo "Installing Gnome Extensions"
 
 /tmp/scripts/run_module.sh 'gnome-extensions' \
-    '{"type":"gnome-extensions","install":["AppIndicator and KStatusNotifierItem Support","Blur my Shell","Logo Menu"]}'
+    '{"type":"gnome-extensions","install":["Dash to Dock", "AppIndicator and KStatusNotifierItem Support","Blur my Shell","Logo Menu"]}'
 # Temporary workaround for https://github.com/micheleg/dash-to-dock/issues/2413
 # Remove when v104 of the extension is relased
-$DNF_CMD -y --setopt=install_weak_deps=False install \
-	gnome-shell-extension-dash-to-dock
+# $DNF_CMD -y --setopt=install_weak_deps=False install \
+# 	gnome-shell-extension-dash-to-dock
 	
 echo "Installing packages"
 
