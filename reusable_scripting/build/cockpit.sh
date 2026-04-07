@@ -14,6 +14,7 @@ $DNF_CMD -y --setopt=install_weak_deps=False install \
     cockpit-storaged \
     cockpit-system \
     cockpit-files \
-    pcp
+    pcp \
+    python3-pcp
 
 echo "done"
