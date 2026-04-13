@@ -9,7 +9,7 @@
 # applications to the "well known" folders (which is something similar to how
 # Android restricts apps) for added security.
 
-if [ -d $HOME/Desktop/Nextcloud ]; then
+if [ -d $HOME/Nextcloud ]; then
     cd $HOME
     for dir in Documents Music Templates Videos; do
         if [ ! -d $dir/Nextcloud ]; then
