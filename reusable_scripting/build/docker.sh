@@ -13,7 +13,7 @@ DOCKER_PACKAGES="containerd.io \
     docker-compose-plugin \
     docker-model-plugin"
 
-if [ "$BASE_OS_TYPE" == "almalinux" ]; then    
+if [ "$BASE_OS_TYPE" == "almalinux" ] || [ "$BASE_OS_TYPE" == "centos" ]; then    
     $DNF_CMD config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 else 
     $DNF_CMD config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
