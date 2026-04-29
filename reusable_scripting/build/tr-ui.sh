@@ -8,8 +8,22 @@ echo "Copy system files"
 cp -r /ctx/oci/tr-osforge/system_files/tr-ui-fixes/* /
 
 echo "Installing Gnome Extensions"
-/tmp/scripts/run_module.sh 'gnome-extensions' \
+if [ "$BASE_OS_TYPE" == "fedora" ] || [ "$BASE_OS_VERSION" == "44" ]; then
+  /tmp/scripts/run_module.sh 'gnome-extensions' \
+    '{"type":"gnome-extensions","install":["Weather or Not"]}'
+  # Workaround for the e.g.o GNOME 50 review backlog
+  $DNF_CMD -y --setopt=install_weak_deps=False install \
+    gnome-shell-extension-system-monitor
+
+  curl -L https://github.com/BigE/desk-changer/releases/download/version-44/desk-changer@eric.gach.gmail.com-version-44.zip \
+    > /tmp/desk-changer@eric.gach.gmail.com-version-44.zip
+  gnome-extensions install /tmp/desk-changer@eric.gach.gmail.com-version-44.zip
+
+  # TODO: Accent icons
+else
+  /tmp/scripts/run_module.sh 'gnome-extensions' \
     '{"type":"gnome-extensions","install":["system-monitor-next","Accent Icons","Weather or Not","DeskChanger"]}'
+fi
 
 echo "Adding Fonts"
 /tmp/scripts/run_module.sh 'fonts' \
