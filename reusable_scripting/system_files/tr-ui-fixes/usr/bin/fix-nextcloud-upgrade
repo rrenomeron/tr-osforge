@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+# This removes a bunch of temporary files that causes drama with 
+# Nextcloud upgrades with big changes
+
+# See https://github.com/nextcloud/desktop/issues/8999#issuecomment-3518456601
+# and https://github.com/nextcloud/desktop/issues/9730
+
+echo "Removing QML Cache files"
+if ! rm -rf ~/.var/app/com.nextcloud.desktopclient.nextcloud/cache/Nextcloud/qmlcache/*; then
+    echo "Failed to remove QML cache files"
+    exit 1
+fi
+
+# This was specific to the v33 upgrade, but it's probably ok to remove it anyway
+echo "Removing kdsingleapp socket and lock file"
+if ! rm -rf ~/.var/app/com.nextcloud.desktopclient.nextcloud/cache/kdsingleapp-$USER-nextcloud*; then
+    echo "Failed to remove kdsingleapp socket and lock file"
+    exit 1
+fi
+
+echo "Nextcloud fixes completed successfully"
