@@ -11,13 +11,17 @@ echo "Installing Gnome Extensions"
 if [ "$BASE_OS_TYPE" == "fedora" ] && [ "$BASE_OS_VERSION" == "44" ]; then
   /tmp/scripts/run_module.sh 'gnome-extensions' \
     '{"type":"gnome-extensions","install":["Weather or Not"]}'
-  # Workaround for the e.g.o GNOME 50 review backlog
+  
+  # Workarounds for the e.g.o GNOME 50 review backlog
+
   $DNF_CMD -y --setopt=install_weak_deps=False install \
-    gnome-shell-extension-system-monitor
+    gnome-shell-extension-system-monitor-applet
 
   curl -L https://github.com/BigE/desk-changer/releases/download/version-44/desk-changer@eric.gach.gmail.com-version-44.zip \
     > /tmp/desk-changer@eric.gach.gmail.com-version-44.zip
-  gnome-extensions install /tmp/desk-changer@eric.gach.gmail.com-version-44.zip
+  #gnome-extensions install /tmp/desk-changer@eric.gach.gmail.com-version-44.zip
+  unzip /tmp/desk-changer@eric.gach.gmail.com-version-44.zip -d /usr/share/gnome-shell/extensions/desk-changer@eric.gach.gmail.com
+  glib-compile-schemas --strict /usr/share/gnome-shell/extensions/desk-changer@eric.gach.gmail.com/schemas
 
   # TODO: Accent icons
 else
