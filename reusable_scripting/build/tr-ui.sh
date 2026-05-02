@@ -8,7 +8,7 @@ echo "Copy system files"
 cp -r /ctx/oci/tr-osforge/system_files/tr-ui-fixes/* /
 
 echo "Installing Gnome Extensions"
-if [ "$BASE_OS_TYPE" == "fedora" ] || [ "$BASE_OS_VERSION" == "44" ]; then
+if [ "$BASE_OS_TYPE" == "fedora" ] && [ "$BASE_OS_VERSION" == "44" ]; then
   /tmp/scripts/run_module.sh 'gnome-extensions' \
     '{"type":"gnome-extensions","install":["Weather or Not"]}'
   # Workaround for the e.g.o GNOME 50 review backlog
