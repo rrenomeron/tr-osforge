@@ -121,3 +121,16 @@ echo "Adding Ptyxis Configuration"
 
 glib-compile-schemas /usr/share/glib-2.0/schemas
 
+echo "Adding Bluefin Extra Wallpapers" 
+BLUEFIN_EXTRA_WALLPAPER_DOWNLOAD=https://github.com/ublue-os/artwork/releases/download/bluefin-extra-v2026-05-09/bluefin-wallpapers-extra-gnome.tar.zstd
+
+curl -L $BLUEFIN_EXTRA_WALLPAPER_DOWNLOAD > /tmp/bluefin-extra-wallpaper.tar
+
+mkdir -p /tmp/bluefin-extra-wallpaper && cd /tmp/bluefin-extra-wallpaper
+
+tar xvf /tmp/bluefin-extra-wallpaper.tar
+
+mkdir -p /usr/share/backgrounds/bluefin-extra
+cp /tmp/bluefin-extra-wallpaper/images/* /usr/share/backgrounds/bluefin-extra
+cp /tmp/bluefin-extra-wallpaper/gnome-background-properties/* /usr/share/gnome-background-properties
+
