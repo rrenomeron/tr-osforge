@@ -14,6 +14,9 @@ echo "Installing Gnome Extensions"
 echo "Adding Fonts"
 /tmp/scripts/run_module.sh 'fonts' \
   '{ "type": "fonts", "fonts" : {"google-fonts": [ "Roboto", "Roboto Condensed", "Lato", "Lora", "Montserrat" ], "url-fonts": [ { "name": "gentium-7", "url": "https://software.sil.org/downloads/r/gentium/Gentium-7.000.zip" }, { "name": "charis-7", "url": "https://software.sil.org/downloads/r/charis/Charis-7.000.zip" } ] }}'
+if [ "$BASE_OS_TYPE" == "fedora" ]; then
+  $DNF_CMD install -y intel-one-mono-fonts
+fi
 
 echo "Installing System76 Wallpapers"
 curl -L https://system76.com/content/downloads/System76-Wallpapers.zip > /tmp/System76-Wallpapers.zip
