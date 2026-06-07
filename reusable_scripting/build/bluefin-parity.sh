@@ -22,6 +22,9 @@ shopt -s nullglob
 
 rsync -av \
 	--exclude=etc/profile.d/ublue-fastfetch.sh \
+	--exclude=etc/profile.d/ublue-motd.sh \
+	--exclude=etc/profile.d/umotd.sh \
+	--exclude=usr/bin/ublue-motd \
  /ctx/oci/common/shared/ /
 cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
 cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
