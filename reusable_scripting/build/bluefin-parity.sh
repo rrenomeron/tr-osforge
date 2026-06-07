@@ -99,24 +99,6 @@ systemctl disable rpm-ostreed-automatic.timer
 systemctl disable flatpak-system-update.timer
 systemctl disable bootc-fetch-apply-updates.timer
 
-
-echo "Setting up non-Bluefin ublue-motd"
-
-mkdir -p /usr/share/ublue-os/motd
-cat > /usr/share/ublue-os/motd/env.sh << ENV.SH
-#!/usr/bin/env sh
-# KEEP THIS SMALL
-# This will run on every shell that a user starts up.
-export MOTD_IMAGE_NAME=$IMAGE_NAME
-export MOTD_IMAGE_TAG=$TAG
-ENV.SH
-
-cat > /usr/share/ublue-os/motd/template.md << "TEMPLATE.MD"
-This bootc based system is running
-ghcr.io/rrenomeron/${MOTD_IMAGE_NAME}:${MOTD_IMAGE_TAG}
-
-TEMPLATE.MD
-
 echo "Enabling Flatpak preinstall"
 systemctl enable flatpak-preinstall.service
 
