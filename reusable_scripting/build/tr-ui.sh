@@ -23,10 +23,10 @@ curl -L https://system76.com/content/downloads/System76-Wallpapers.zip > /tmp/Sy
 mkdir /usr/share/backgrounds/system76
 unzip /tmp/System76-Wallpapers.zip -d /usr/share/backgrounds/system76
 
-echo "Installing Framework Wallpapers"
-curl -L https://downloads.frame.work/assets/framework-laptop12-wallpaper-pack.zip > /tmp/framework-wallpapers.zip
-mkdir /usr/share/backgrounds/framework
-unzip /tmp/framework-wallpapers.zip -d /usr/share/backgrounds/framework
+# echo "Installing Framework Wallpapers"
+# curl -L https://downloads.frame.work/assets/framework-laptop12-wallpaper-pack.zip > /tmp/framework-wallpapers.zip
+# mkdir /usr/share/backgrounds/framework
+# unzip /tmp/framework-wallpapers.zip -d /usr/share/backgrounds/framework
 
 echo "Adding UI Defaults"
 glib-compile-schemas /usr/share/glib-2.0/schemas
