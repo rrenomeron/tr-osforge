@@ -33,11 +33,18 @@ if [ "$BASE_OS_TYPE" == "fedora" ]; then
     qemu-system-x86-core \
     qemu-user-binfmt \
     qemu-user-static 
+
+  echo "Installing various libvirt fixes"   
+  copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds
+else
+  # Fix breakage in non-Fedora builds
+  # See https://github.com/ublue-os/bluefin-lts/commit/b76909f9de2a51d5436c80aedcc985e97c959358
+  # Note: this does not autoupdate
+  # TODO: do we still need this?  Bluefin non-LTS does not have it
+  echo "Installing various libvirt fixes" 
+  $DNF_CMD -y install \
+    https://download.copr.fedorainfracloud.org/results/ublue-os/packages/fedora-44-x86_64/10417407-ublue-os-libvirt-workarounds/ublue-os-libvirt-workarounds-1.1-1.fc44.noarch.rpm
 fi
-
-
-echo "Installing various libvirt fixes" 
-copr_install_isolated ublue-os/packages ublue-os-libvirt-workarounds
 
 # Copied from Bluefin, NOT common
 echo "Enabling virtualization-enabled groups"
