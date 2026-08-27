@@ -25,6 +25,8 @@ rsync -av \
 	--exclude=etc/profile.d/ublue-motd.sh \
 	--exclude=etc/profile.d/umotd.sh \
 	--exclude=usr/bin/ublue-motd \
+	--exclude=usr/bin/uwelcome \
+	--exclude=etc/profile.d/uwelcome.sh \
  /ctx/oci/common/shared/ /
 cp -r /ctx/oci/common/bluefin/usr/share/ublue-os/just/* /usr/share/ublue-os/just/
 cp -r /ctx/oci/common/bluefin/usr/share/backgrounds/* /usr/share/backgrounds
