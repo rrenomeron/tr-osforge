@@ -24,10 +24,6 @@ $DNF_CMD -y install /ctx/oci/akmods/kernel-rpms/kernel-devel-*.rpm
 
 $DNF_CMD versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel-modules kernel-modules-core kernel-modules-extra
 
-
-$DNF_CMD -y install \
-    /ctx/oci/akmods/rpms/kmods/*framework-laptop*.rpm \
-    /ctx/oci/akmods/rpms/common/*framework-laptop*.rpm
 $DNF_CMD -y install \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
