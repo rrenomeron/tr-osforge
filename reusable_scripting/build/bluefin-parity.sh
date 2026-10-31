@@ -98,7 +98,7 @@ copr_install_isolated ublue-os/packages uupd
 echo "Disabling non-ublue update mechanisms" 
 
 systemctl disable rpm-ostreed-automatic.timer
-systemctl disable flatpak-system-update.timer
+systemctl is-enabled flatpak-system-update.timer && systemctl disable flatpak-system-update.timer
 systemctl disable bootc-fetch-apply-updates.timer
 
 echo "Enabling Flatpak preinstall"
