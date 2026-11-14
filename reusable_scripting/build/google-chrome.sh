@@ -41,6 +41,6 @@ $DNF_CMD install -y google-chrome-stable
 
 echo "Cleanup"
 # Clean up repo file (required - repos don't work at runtime in bootc images)
-rm -f /etc/yum.repos.d/google-chrome.repo
+rm -rf /etc/yum.repos.d/google-chrome.repo
 
 echo "done"
