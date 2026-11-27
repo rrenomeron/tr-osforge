@@ -8,3 +8,6 @@ curl -sfL https://github.com/microsoft/edit/releases/download/v$MSEDIT_VERSION/e
 
 tar -C /tmp -xvzf /tmp/msedit.tar.gz
 cp /tmp/edit /usr/bin
+
+# Needed for "find" command to work.  See https://github.com/microsoft/edit/issues/172#issuecomment-2896680778
+$DNF_CMD install -y libicu-devel
